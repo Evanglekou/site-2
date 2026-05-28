@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUEENS THE BEAUTY STUDIO | Premium Cosmetics & Care</title>
+    <meta name="description" content="Premium health and personal care retailers. Explore our curated selection of cosmetics, perfumes, and digital beauty experiences.">
+    <style>
+        /* DESIGN SYSTEM: LUXE SPLIT-SCREEN / GLAMOUR AESTHETIC */
+        :root {
+            --burgundy: #4A1525;        /* Deep Luxe Red */
+            --rose-gold: #CDA27A;       /* Elegant Accent */
+            --blush: #FDF9F6;           /* Soft Powder Pink Background */
+            --blush-dark: #F5EAE5;      /* Darker Powder */
+            --text-dark: #2C2C2C;       /* Almost Black */
+            --text-light: #FDF9F6;      
+            
+            --font-serif: 'Playfair Display', 'Didot', 'Bodoni MT', serif;
+            --font-sans: 'Montserrat', 'Helvetica Neue', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--text-dark);
+            background-color: var(--blush);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- SPLIT LAYOUT --- */
+        .layout-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* LEFT PANEL (FIXED) */
+        .fixed-panel {
+            width: 35%;
+            background-color: var(--burgundy);
+            color: var(--text-light);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 50px 4%;
+            z-index: 100;
+        }
+
+        /* Abstract CSS Graphic in Left Panel */
+        .fixed-panel::before {
+            content: '';
+            position: absolute;
+            top: -10%; left: -20%;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(205, 162, 122, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .brand-header {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-dba {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .logo-dba span {
+            color: var(--rose-gold);
+            font-style: italic;
+            text-transform: lowercase;
+            font-size: 1.8rem;
+            display: block;
+        }
+
+        .legal-entity {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.6;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 40px 0 auto;
+        }
+
+        .nav-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .nav-menu a:hover {
+            color: var(--rose-gold);
+            transform: translateX(5px);
+        }
+
+        .legal-footer {
+            font-size: 0.75rem;
+            color: rgba(253, 249, 246, 0.5);
+            line-height: 1.8;
+        }
+
+        .legal-footer a {
+            color: var(--rose-gold);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .legal-footer a:hover {
+            color: var(--text-light);
+        }
+
+        /* RIGHT PANEL (SCROLLABLE) */
+        .scroll-panel {
+            width: 65%;
+            margin-left: 35%;
+            background-color: var(--blush);
+            min-height: 100vh;
+        }
+
+        .section {
+            padding: 100px 8%;
+            position: relative;
+        }
+
+        /* Soft CSS "Powder/Blush" Orbs */
+        .powder-blob-1 {
+            position: absolute;
+            top: 10%; right: 5%;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(205, 162, 122, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .powder-blob-2 {
+            position: absolute;
+            bottom: 10%; left: 0;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(74, 21, 37, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .content-layer {
+            position: relative;
+            z-index: 1;
+        }
+
+        .kicker {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--burgundy);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--rose-gold);
+            padding-bottom: 10px;
+            width: fit-content;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            color: var(--burgundy);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--burgundy);
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5A5A5A;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .btn-luxe {
+            display: inline-block;
+            background: var(--burgundy);
+            color: var(--text-light);
+            padding: 16px 40px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            border: 1px solid var(--burgundy);
+            transition: all 0.4s ease;
+            margin-top: 20px;
+        }
+
+        .btn-luxe:hover {
+            background: transparent;
+            color: var(--burgundy);
+        }
+
+        /* --- INFO GRID --- */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 40px;
+            border: 1px solid var(--blush-dark);
+            box-shadow: 0 10px 30px rgba(74, 21, 37, 0.03);
+        }
+
+        .info-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--burgundy);
+            margin-bottom: 15px;
+        }
+
+        /* --- APP PROMO (CRITICAL FOR GOOGLE PLAY CONSOLE) --- */
+        .app-section {
+            background-color: var(--blush-dark);
+            border-top: 1px solid rgba(205, 162, 122, 0.3);
+            border-bottom: 1px solid rgba(205, 162, 122, 0.3);
+            padding: 100px 8%;
+        }
+
+        .app-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: var(--burgundy);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .feature-list li::before {
+            content: '✧';
+            color: var(--rose-gold);
+            font-size: 1.2rem;
+        }
+
+        /* CSS Phone Mockup - Fashion Style */
+        .fashion-phone {
+            width: 100%;
+            max-width: 320px;
+            height: 600px;
+            background: var(--white);
+            border-radius: 40px;
+            border: 8px solid var(--burgundy);
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(74, 21, 37, 0.15);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 120px; height: 25px;
+            background: var(--burgundy);
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            padding: 50px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            text-align: center;
+            color: var(--burgundy);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .ar-viewfinder {
+            flex: 1;
+            border: 1px solid var(--rose-gold);
+            border-radius: 12px;
+            background: repeating-linear-gradient(45deg, var(--blush) 0, var(--blush) 10px, var(--blush-dark) 10px, var(--blush-dark) 20px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--burgundy);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .ar-viewfinder::before {
+            content: '';
+            position: absolute;
+            width: 60%; height: 60%;
+            border: 1px dashed var(--burgundy);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+            padding: 15px;
+            background: var(--blush);
+            border-radius: 12px;
+        }
+
+        .color-dot {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* --- REGISTRY & CONTACT (D&B MATCH) --- */
+        .registry-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 40px;
+        }
+
+        .registry-table td {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--blush-dark);
+            vertical-align: top;
+        }
+
+        .registry-table td:first-child {
+            width: 35%;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--rose-gold);
+            font-weight: 600;
+        }
+
+        .registry-table td:last-child {
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        /* Minimalist Form */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        input, textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--burgundy);
+            padding: 10px 0;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            color: var(--text-dark);
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-bottom-color: var(--rose-gold);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .layout-wrapper { flex-direction: column; }
+            .fixed-panel {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 40px 5%;
+            }
+            .nav-menu { flex-direction: row; flex-wrap: wrap; margin: 30px 0; }
+            .scroll-panel { width: 100%; margin-left: 0; }
+            .section { padding: 60px 5%; }
+            .info-grid, .app-layout { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="layout-wrapper">
+        
+        <aside class="fixed-panel">
+            <div class="brand-header">
+                <div class="logo-dba">
+                    QUEENS
+                    <span>The Beauty Studio</span>
+                </div>
+                <div class="legal-entity">
+                    Operated by:<br>Karagiannidou Eleni Tou Anesti
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#about">The Studio</a>
+                <a href="#retail">Cosmetics Retail</a>
+                <a href="#app">Digital Beauty App</a>
+                <a href="#contact">Registry & Contact</a>
+            </nav>
+
+            <div class="legal-footer">
+                <strong>Google Play Developer Policies:</strong><br>
+                <a href="#">Privacy Policy (GDPR)</a> | <a href="#">Terms of Retail</a><br>
+                <a href="#" style="color: white; text-decoration: underline;">Request Account & Data Deletion</a><br>
+                <a href="#">App Camera/AR Permissions</a>
+            </div>
+        </aside>
+
+        <main class="scroll-panel">
+            
+            <section class="section">
+                <div class="powder-blob-1"></div>
+                <div class="content-layer">
+                    <span class="kicker">Health and Personal Care Retailers</span>
+                    <h1>Elegance,<br>Curated.</h1>
+                    <p>Discover a premium selection of cosmetics, luxury perfumes, and toiletries. We blend the tactile experience of a high-end beauty studio with cutting-edge digital retail.</p>
+                    <a href="#app" class="btn-luxe">Discover Our App</a>
+                </div>
+            </section>
+
+            <section id="about" class="section" style="padding-top: 0;">
+                <div class="content-layer">
+                    <h2>The Beauty Enterprise</h2>
+                    <p>Operating under the leadership of Key Principal <strong>Eleni Karagiannidou</strong>, our officially registered entity (KARAGIANNIDOU ELENI TOU ANESTI) does business as <strong>QUEENS THE BEAUTY STUDIO</strong>.</p>
+                    
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h3>Retail Trade</h3>
+                            <p style="font-size: 0.95rem;">As established Health and Personal Care Retailers, we provide a sophisticated environment for clients to explore top-tier beauty brands and exclusive cosmetic lines.</p>
+                        </div>
+                        <div class="info-card">
+                            <h3>Cosmetics & Perfumes</h3>
+                            <p style="font-size: 0.95rem;">Our extensive inventory specializes strictly in high-quality Toiletries, cosmetics, and perfumes, ensuring every product meets our rigorous standards of luxury.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="app" class="section app-section">
+                <div class="powder-blob-2"></div>
+                <div class="content-layer app-layout">
+                    <div>
+                        <span class="kicker">Google Play Publisher</span>
+                        <h2>Queens Beauty App</h2>
+                        <p>To revolutionize how our clients interact with cosmetics, <strong>we have launched a proprietary mobile application on the Google Play Store.</strong></p>
+                        <p>The app bridges e-commerce with augmented reality, allowing users to digitally try on makeup, collect studio loyalty points, and purchase perfumes directly from their smartphones.</p>
+                        
+                        <ul class="feature-list">
+                            <li><strong>AR Virtual Try-On:</strong> Test lipsticks and eyeshadows using your device's camera.</li>
+                            <li><strong>Digital Queens Club:</strong> Scan your mobile card in-studio to earn beauty rewards.</li>
+                            <li><strong>E-Commerce:</strong> Order premium toiletries and perfumes for home delivery.</li>
+                            <li><strong>Studio Bookings:</strong> Reserve personal care consultations instantly.</li>
+                        </ul>
+                    </div>
+
+                    <div class="fashion-phone">
+                        <div class="phone-notch"></div>
+                        <div class="phone-screen">
+                            <div class="app-header">AR TRY-ON</div>
+                            
+                            <div class="ar-viewfinder">
+                                <div>[ Camera Active ]</div>
+                                <div style="font-size: 0.6rem; margin-top: 5px;">Analyzing Facial Features...</div>
+                            </div>
+
+                            <div class="color-palette">
+                                <div class="color-dot" style="background: #9B2D30;"></div>
+                                <div class="color-dot" style="background: #D48C84;"></div>
+                                <div class="color-dot" style="background: #B35C53;"></div>
+                                <div class="color-dot" style="background: #E8B4B8;"></div>
+                            </div>
+
+                            <div style="margin-top: 15px; background: var(--burgundy); color: white; text-align: center; padding: 15px; border-radius: 8px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px;">
+                                Add to Cart
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <div class="content-layer">
+                    <h2>Official Registry</h2>
+                    
+                    <table class="registry-table">
+                        <tr>
+                            <td>Legal Entity Name</td>
+                            <td>KARAGIANNIDOU ELENI TOU ANESTI</td>
+                        </tr>
+                        <tr>
+                            <td>Doing Business As (DBA)</td>
+                            <td>QUEENS THE BEAUTY STUDIO</td>
+                        </tr>
+                        <tr>
+                            <td>Key Principal</td>
+                            <td>Eleni Karagiannidou</td>
+                        </tr>
+                        <tr>
+                            <td>Industry Classifications</td>
+                            <td>
+                                Health and Personal Care Retailers<br>
+                                Retail Trade<br>
+                                Toiletries, cosmetics, and perfumes
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Official Comms</td>
+                            <td style="color: var(--burgundy); font-weight: bold;">info@karagiannidouelenitouanesti.cloud</td>
+                        </tr>
+                    </table>
+
+                    <h2 style="margin-top: 60px;">Contact The Studio</h2>
+                    <p style="margin-bottom: 30px;">For inquiries regarding cosmetic retail, studio appointments, or technical support for the Queens Beauty App.</p>
+                    
+                    <form onsubmit="event.preventDefault();">
+                        <input type="text" placeholder="Full Name" required>
+                        <input type="email" placeholder="Email Address" required>
+                        <textarea placeholder="Your inquiry or app support request..." rows="3" required></textarea>
+                        <button type="submit" class="btn-luxe" style="margin-top: 10px;">Send Message</button>
+                    </form>
+                </div>
+            </section>
+
+            <footer style="padding: 40px 8%; border-top: 1px solid var(--blush-dark); text-align: center; font-size: 0.8rem; color: #888;">
+                &copy; 2026 KARAGIANNIDOU ELENI TOU ANESTI. All rights reserved.
+            </footer>
+
+        </main>
+    </div>
+
+</body>
+</html>
